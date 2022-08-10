@@ -38,17 +38,41 @@ function showRecipes(recipes) {
 
 function getRecipes() {
     const searchInput = document.getElementById('search');
+    const search_ingredients = document.getElementById('search_ingredients');
+    let recipesFiltred = recipes;
     searchInput.addEventListener('input', (e) => {
         const searchString = e.target.value.toLowerCase();
+        const searchStringIngredients = search_ingredients.value.toLowerCase();
         if (searchString.length >= 3) {
-            let recipesFiltred = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchString)
+            recipesFiltred = recipes.filter(recipe => recipe.name.toLowerCase().includes(searchString)
                 || recipe.description.toLowerCase().includes(searchString)
                 || recipe.ingredients.find(el => {
                     return (el.ingredient).toLowerCase().includes(searchString);
                 }));
             showRecipes(recipesFiltred);
         }
-        else {
+        else if (searchStringIngredients.length > 3){
+            showRecipes(recipesFiltred);
+        }
+        else if (searchStringIngredients < 3){
+            recipesFiltred = recipes;
+            showRecipes(recipes);
+        }
+    })
+    search_ingredients.addEventListener('input', (e) => {
+        const searchString = e.target.value.toLowerCase();
+        const searchStringMain = searchInput.value.toLowerCase();
+        if(searchString.length >= 3) {
+            recipesFiltred = recipesFiltred.filter(recipe => recipe.ingredients.find(el => {
+                return (el.ingredient).toLowerCase().includes(searchString)
+            }));
+            showRecipes(recipesFiltred);
+        }
+        else if (searchStringMain.length > 3 ) {
+            showRecipes(recipesFiltred);
+        }
+        else if (searchStringMain.length < 3){
+            recipesFiltred = recipes;
             showRecipes(recipes);
         }
     })

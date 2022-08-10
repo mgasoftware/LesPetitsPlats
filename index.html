@@ -32,20 +32,25 @@
 
     <section class="filter">
         <div class="filter_view">
-            <div class="filter_ingredients_view"></div>
-            <div class="filter_appliance_view"></div>
-            <div class="filter_ustensils_view"></div>
+            <div class="filter_view_ingredients"></div>
+            <div class="filter_view_appliance"></div>
+            <div class="filter_view_ustensils"></div>
         </div>
         <div class="filter_container">
-            <div class="filter_ingredients_container">
-                <input type="search" id="search_ingredients" class="filter_search ingredients" placeholder="Ingredients">
-                
+            <div id="container_ingredients" class="filter_container_ingredients">
+                <a class="open_search_ingredients"><i class="fa-solid fa-angle-down"></i></a>
+                <input id="search_ingredients" class="filter_search ingredients" placeholder="Ingredients" />
+                <div id="list_ingredients" class="list_ingredients ingredients"></div>
             </div>
-            <div class="filter_appliance_container">
-                <input type="search" id="search_appliance" class="filter_search applicance" placeholder="Appareils">
+            <div class="filter_container_appliance">
+                <button type="button" id="search_appliance" class="filter_search appliance">
+                    <p class="text_appliance">Appareils</p>
+                </button>
             </div>
             <div class="filter_ustensils_container">
-                <input type="search" id="search_ustensils" class="filter_search ustensils" placeholder="Ustensiles">
+                <button type="button" id="search_ustensils" class="filter_search ustensils">
+                    <p class="text_ustensils">Ustensiles</p>
+                </button>
             </div>
         </div>
     </section>
@@ -64,8 +69,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
         integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
-    <script src="data/recipes.js"></script>
-    <script src="scripts/pages/card.js"></script>
+    <script type="module" src="index.js"></script>
 </body>
 
 </html>

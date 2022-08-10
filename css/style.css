@@ -21,6 +21,10 @@ h1 {
     margin-bottom: 17px;
 }
 
+a {
+    cursor: pointer;
+}
+
 .search-bar {
     display: flex;
     width: 100%;
@@ -60,6 +64,110 @@ input {
     right: 1%;
     bottom: 30%;
     font-size: 32.06px;
+}
+
+.filter {
+    margin-bottom: 25px;
+}
+
+.filter_view {
+    display: flex;
+}
+
+.filter_view_ingredients {
+    display: flex;
+    color: red;
+}
+
+.filter_container {
+    display: flex;
+}
+
+.filter_container_ingredients {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.fa-angle-down {
+    position: absolute;
+    left: 240px;
+    top: 307px;
+    color: white;
+}
+
+.fa-angle-up {
+    position: absolute;
+    left: 700px;
+    top: 307px;
+    color: white;
+}
+
+.close_search_ingredients,
+.open_search_ingredients {
+    cursor: pointer;
+}
+
+.filter_search {
+    width: 170px;
+    height: 69px;
+    border-radius: 5px;
+    margin-right: 20px;
+    border: none;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: #FFFFFF;
+    caret-color: transparent;
+    cursor: pointer;
+}
+
+.filter_search::placeholder{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    color: white;
+    padding-left: 15px ;
+}
+
+.filter_search_list {
+    margin-right: 20px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border: none;
+    padding-bottom: 27px;
+    padding-top: 22px;
+}
+.filter_search_list::placeholder{
+    color: white;
+    opacity: 0.5;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
+    padding-left: 19px;
+}
+.list_ingredients {
+    width: 647px;
+    z-index: 2;
+    position: absolute;
+    top: 352px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    gap: 0px;
+    margin-bottom: 0px;
+    padding-left: 19px;
+    color: #FFFFFF;
+}
+.ingredients {
+    background: #3282f7;
+}
+
+.appliance {
+    background: #68D9A4;
+}
+
+.ustensils {
+    background: #ED6454;
 }
 
 .main_container {
@@ -127,53 +235,4 @@ input {
     font-weight: 400;
     font-size: 12px;
     line-height: 100%;
-}
-.filter {
-    margin-bottom: 25px;
-}
-
-.filter_view {
-    display: flex;
-}
-
-.filter_container {
-    display: flex;
-}
-
-.filter_ingredients_container {
-    border-radius: 5px;
-}
-
-.filter_search {
-    width: 170px;
-    height: 69px;
-    border-radius: 5px;
-    margin-right: 20px;
-    border: thin;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    color: #FFFFFF;
-    caret-color: transparent;
-}
-
-.filter_search::placeholder {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    color: white;
-}
-
-.ingredients {
-    background: #3282f7;
-}
-
-.applicance {
-    background: #68D9A4;
-}
-
-.ustensils {
-    background: #ED6454;
 }
