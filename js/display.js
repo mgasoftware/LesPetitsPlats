@@ -78,3 +78,25 @@ export function displayFilterIngredients(dataIngredients, e) {
     });
 
 }
+
+export function displayIngredientFilter(e, faAngleDown, faAngleUp, filterContainerIngredients, closeSearchIngredients) {
+    faAngleDown.style.display = 'none';
+    faAngleUp.style.display = 'block';
+    faAngleUp.setAttribute('class', 'fa-solid fa-angle-up');
+    filterContainerIngredients.style.width = '667px';
+    closeSearchIngredients.setAttribute('class', 'close_search_ingredients');
+
+    closeSearchIngredients.appendChild(faAngleUp);
+    filterContainerIngredients.appendChild(closeSearchIngredients);
+}
+
+export function closeIngredientFilter(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients) {
+    faAngleDown.style.display = 'flex';
+    faAngleDown.style.top = '375px';
+    faAngleUp.style.display = 'none';
+    searchIngredients.setAttribute('class', 'filter_search ingredients');
+    searchIngredients.setAttribute('placeholder', 'Ingredients');
+    searchIngredients.value = '';
+    listIngredients.innerHTML = ``;
+    filterContainerIngredients.style.width = 'auto';
+}

@@ -72,11 +72,28 @@ input {
 
 .filter_view {
     display: flex;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #FFFFFF;
+    margin-bottom: 15px;
 }
 
-.filter_view_ingredients {
+.view_ing {
     display: flex;
-    color: red;
+}
+
+.view_ing p {
+    margin-right: 10px;
+    background: #3282f7;
+    padding-top: 10px ;
+    padding-left: 5px;
+    padding-right: 13px;
+    border-radius: 5px;
+    min-width: 107px;
+    min-height: 37px;
 }
 
 .filter_container {
@@ -92,14 +109,15 @@ input {
 .fa-angle-down {
     position: absolute;
     left: 240px;
-    top: 307px;
+    top: 320px;
     color: white;
 }
 
 .fa-angle-up {
+    display: none;
     position: absolute;
     left: 700px;
-    top: 307px;
+    top: 320px;
     color: white;
 }
 
@@ -150,7 +168,7 @@ input {
     width: 647px;
     z-index: 2;
     position: absolute;
-    top: 352px;
+    top: 360px;
     display: grid;
     grid-template-columns: 2fr 2fr 2fr;
     gap: 0px;

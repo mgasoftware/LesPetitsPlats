@@ -13,3 +13,12 @@ export function filterIngredients(datas, searchStingIngredients) {
     }));
     return datas;
 }
+
+export function filterTagsIngredients(datas, selectedTagIngredients) {
+    for (let i = 0; i < selectedTagIngredients.length; i++) {
+        datas = datas.filter(data => data.ingredients.find(el => {
+            return (el.ingredient).toLowerCase().includes(selectedTagIngredients[i]);
+        }));
+    }
+    return datas;
+}
