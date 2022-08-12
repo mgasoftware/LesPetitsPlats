@@ -1,11 +1,13 @@
 import { recipes } from "/data/recipes.js";
-import { displayCard, displayIngredients, displayFilterIngredients, displayIngredientFilter, closeIngredientFilter } from '/js/display.js'
+import { displayCard, displayIngredients, displayFilterIngredients, displayListIngredient, displayTagIngredient, closeListIngredient } from '/js/display.js'
 import { filterCard, filterIngredients, filterTagsIngredients } from "./js/filter.js";
 
 let datasFiltered = [];
 let selectedTagIngredients = [];
 let searchString = '';
 let searchStringIngredients = '';
+let linkTagCloseIngs = []; 
+let tagTextIng = [];
 
 const searchInputMain = document.getElementById('search');
 const searchIngredients = document.getElementById('search_ingredients');
@@ -17,35 +19,37 @@ const openSearchIngredients = document.querySelector('.open_search_ingredients')
 const faAngleUp = document.createElement('i');
 const filterView = document.querySelector('.filter_view');
 const filterViewIngredients = document.createElement('div');
+const ingredientView = document.createElement('p');
+
 
 displayCard(recipes);
 
 searchInputMain.addEventListener(('input'), e => {
     searchString = e.target.value.toLowerCase();
-    if(searchString.length >= 3 && datasFiltered.length === 0) {
-        console.log('boucle 1');
+    if (searchString.length >= 3 && datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
         datasFiltered = filterCard(recipes, searchString);
         displayCard(datasFiltered);
     }
     else if (searchString.length >= 3 && datasFiltered.length !== 0) {
-        console.log('boucle 2');
         datasFiltered = filterCard(datasFiltered, searchString);
         displayCard(datasFiltered);
     }
-    else if (searchString.length === 0 && datasFiltered.length === 0 && selectedTagIngredients.length === 0){
-        console.log('boucle 3');
+    else if (searchString.length === 0 && datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
         displayCard(recipes);
     }
 })
 
 const openIngredient = e => {
-    displayIngredientFilter(e, faAngleDown, faAngleUp, filterContainerIngredients, closeSearchIngredients);
+    displayListIngredient(e, faAngleDown, faAngleUp, filterContainerIngredients, closeSearchIngredients);
 
-    if(searchString.length >= 3) {
+    if (searchString.length >= 3) {
         displayIngredients(datasFiltered);
     }
-    else {
+    else if (datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
         displayIngredients(recipes);
+    }
+    else {
+        displayIngredients(datasFiltered);
     }
 }
 
@@ -65,24 +69,31 @@ searchIngredients.addEventListener(('input'), e => {
         datasFiltered = filterIngredients(recipes, searchStringIngredients);
         displayFilterIngredients(datasFiltered, searchStringIngredients);
     }
-    else if (datasFiltered === []){
+    else if (datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
         displayFilterIngredients(recipes, searchStringIngredients);
     }
 });
 
 listIngredients.addEventListener(('click'), e => {
-    const ingredientView = document.createElement('p');
+    displayTagIngredient(e, listIngredients, faAngleUp, filterViewIngredients, selectedTagIngredients, filterView);
 
-    listIngredients.style.top = '420px';
-    faAngleUp.style.top = '360px';
-    filterViewIngredients.className = 'view_ing';
-    selectedTagIngredients.push(e.target.textContent.toLowerCase());
-    ingredientView.textContent = e.target.textContent;
-    filterViewIngredients.appendChild(ingredientView);
-    filterView.appendChild(filterViewIngredients);
-    datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
-    displayCard(datasFiltered);
-    closeIngredientFilter(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients);
+    if (searchString.length <= 3 && datasFiltered.length === 0) {
+        datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
+        displayCard(datasFiltered);
+    }
+    else {
+        datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
+        displayCard(datasFiltered);
+    }
+
+    linkTagCloseIngs.push(document.querySelector('.close_tag_ing'));
+    tagTextIng.push(document.querySelector('.tag_text_ing'));
+    console.log(tagTextIng);
+    linkTagCloseIngs.forEach(linkTagCloseIng => linkTagCloseIng.addEventListener('click', e => {
+        console.log(e.currentTarget);
+        console.log(tagTextIng);
+    }));
+    closeListIngredient(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients);
 })
 
-closeSearchIngredients.addEventListener(('click'), e => closeIngredientFilter(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients));
+closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients));

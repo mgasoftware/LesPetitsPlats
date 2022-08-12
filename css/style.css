@@ -83,17 +83,28 @@ input {
 
 .view_ing {
     display: flex;
+    min-width: 107px;
+    min-height: 37px;
 }
 
 .view_ing p {
-    margin-right: 10px;
-    background: #3282f7;
-    padding-top: 10px ;
-    padding-left: 5px;
-    padding-right: 13px;
+    height: 100%;
     border-radius: 5px;
-    min-width: 107px;
-    min-height: 37px;
+    margin-right: 10px;
+    padding-top: 10px ;
+    padding-left: 20px;
+    padding-right: 13px;
+    background: #3282f7;
+}
+
+.fa-circle-xmark {
+    color: white;
+    font-size: 20px;
+}
+
+.close_tag_ing {
+    cursor: pointer;
+    padding-left: 13px;
 }
 
 .filter_container {
@@ -120,6 +131,7 @@ input {
     top: 320px;
     color: white;
 }
+
 
 .close_search_ingredients,
 .open_search_ingredients {
