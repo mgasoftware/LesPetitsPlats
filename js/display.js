@@ -91,22 +91,11 @@ export function displayListIngredient(e, faAngleDown, faAngleUp, filterContainer
 }
 
 export function displayTagIngredient(e, listIngredients, faAngleUp, filterViewIngredients, selectedTagIngredients, filterView) {
-    // ingredientView = document.createElement('p');
-    const closeTag = document.createElement('i');
-    // linkCloseTagIng = document.createElement('a');
-    
-
-    listIngredients.style.top = '420px';
+    filterView.style.height = '46.5px';
+    listIngredients.style.top = '410px';
     faAngleUp.style.top = '360px';
     filterViewIngredients.className = 'view_ing';
-    // closeTag.className = 'fa-regular fa-circle-xmark';
-    // linkCloseTagIng.className = 'close_tag_ing';
-
     selectedTagIngredients.push(e.target.textContent.toLowerCase());
-    // ingredientView.textContent = e.target.textContent;
-    // linkCloseTagIng.appendChild(closeTag);
-    // ingredientView.appendChild(linkCloseTagIng);
-    // filterViewIngredients.appendChild(ingredientView);
 
     filterViewIngredients.innerHTML += `<p class='tag_text_ing'>${e.target.textContent}
                                                 <a class="close_tag_ing">
@@ -122,7 +111,7 @@ export function closeListIngredient(e, faAngleDown, faAngleUp, searchIngredients
         faAngleDown.style.top = '320px';
     }
     else {
-        faAngleDown.style.top = '375px';
+        faAngleDown.style.top = '370px';
     }
     faAngleUp.style.display = 'none';
     searchIngredients.setAttribute('class', 'filter_search ingredients');
@@ -131,5 +120,3 @@ export function closeListIngredient(e, faAngleDown, faAngleUp, searchIngredients
     listIngredients.innerHTML = ``;
     filterContainerIngredients.style.width = 'auto';
 }
-
-// export function closeTagIngredient(e, )
