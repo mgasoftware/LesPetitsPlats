@@ -97,12 +97,29 @@ input {
     background: #3282f7;
 }
 
+.view_app {
+    display: flex;
+    min-width: 107px;
+    min-height: 37px;
+}
+
+.view_app p {
+    height: 100%;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding-top: 10px ;
+    padding-left: 20px;
+    padding-right: 13px;
+    background: #68D9A4;
+}
+
 .fa-circle-xmark {
     color: white;
     font-size: 20px;
 }
 
-.close_tag_ing {
+.close_tag_ing,
+.close_tag_app {
     cursor: pointer;
     padding-left: 13px;
 }
@@ -148,7 +165,7 @@ input {
 #angle-up-appliance {
     display: none;
     position: absolute;
-    left: 1700px;
+    left: 900px;
     top: 320px;
     color: white;
 }

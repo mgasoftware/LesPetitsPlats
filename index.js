@@ -1,6 +1,6 @@
 import { recipes } from "/data/recipes.js";
-import { displayCard, displayIngredients, displayFilterIngredients, displayListIngredient, displayTagIngredient, closeListIngredient, displayAppliance, displayListAppliance } from '/js/display.js'
-import { filterCard, filterIngredients, filterTagsIngredients } from "./js/filter.js";
+import { displayCard, displayIngredients, displayFilterIngredients, displayListIngredient, displayTagIngredient, closeListIngredient, displayAppliance, displayListAppliance, displayTagAppliance, closeListAppliance } from '/js/display.js'
+import { filterCard, filterIngredients, filterTagsIngredients, filterAppliance, filterTagAppliance } from "./js/filter.js";
 
 // Main variable
 let datasFiltered = [];
@@ -11,10 +11,14 @@ let searchStringIngredients = '';
 let selectedTagIngredients = [];
 let linkTagCloseIngs = [];
 let tagTextIngs = [];
+let viewIng;
 
 // Appliance variable
 let searchStringAppliance = '';
 let selectedTagAppliance = [];
+let linkTagCloseApps = [];
+let tagTextApps = [];
+let viewApp;
 
 // Main HTML Element
 const searchInputMain = document.getElementById('search');
@@ -54,7 +58,7 @@ searchInputMain.addEventListener(('input'), e => {
         datasFiltered = filterCard(datasFiltered, searchString);
         displayCard(datasFiltered);
     }
-    else if (searchString.length === 0 && datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
+    else if (searchString.length === 0 && datasFiltered.length === 0 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
         displayCard(recipes);
     }
     else if (searchString.length < 3 && selectedTagIngredients.length >= 0) {
@@ -71,7 +75,7 @@ const openIngredient = e => {
     if (searchString.length >= 3) {
         displayIngredients(datasFiltered);
     }
-    else if (datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
+    else if (datasFiltered.length === 0 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
         displayIngredients(recipes);
     }
     else {
@@ -101,7 +105,7 @@ searchIngredients.addEventListener(('input'), e => {
 });
 
 listIngredients.addEventListener(('click'), e => {
-    displayTagIngredient(e, listIngredients, angleUpIngredients, filterViewIngredients, selectedTagIngredients, filterView);
+    displayTagIngredient(e, listIngredients, angleDownIngredients, filterViewIngredients, selectedTagIngredients, filterView);
 
     if (searchString.length <= 3 && datasFiltered.length === 0) {
         datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
@@ -114,6 +118,7 @@ listIngredients.addEventListener(('click'), e => {
 
     linkTagCloseIngs = document.querySelectorAll('.close_tag_ing');
     tagTextIngs = document.querySelectorAll('.tag_text_ing');
+    viewIng =  document.querySelector('.view_ing');
 
     linkTagCloseIngs.forEach(linkTagCloseIng => linkTagCloseIng.addEventListener('click', e => {
         tagTextIngs.forEach(tagTextIng => tagTextIng.addEventListener('click', e => {
@@ -135,26 +140,107 @@ listIngredients.addEventListener(('click'), e => {
                 displayCard(datasFiltered);
             }
 
-
-            if (selectedTagIngredients.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleUpIngredients.style.top = '320px';
-                filterView.style.height = 0;
-                listIngredients.style.top = '360px';
-            }
+            // if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
+            //     angleDownIngredients.style.top = '320px';
+            //     angleUpIngredients.style.top = '320px';
+            //     filterView.style.width = 0;
+            //     filterView.style.height = 0;
+            //     listIngredients.style.top = '360px';
+            //     viewIng.style.display = 'none';
+            // }
         }));
     }));
 
     closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients);
 })
 
-closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients));
+closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance));
 
 // Appliance function
 const openAppliance = e => {
     displayListAppliance(e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance);
-    displayAppliance(recipes, searchAppliance, listAppliance);
+    if(searchString.length >= 3) {
+        displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    else if (datasFiltered.length === 0 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0) {
+        displayAppliance(recipes, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    else {
+        displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance);
 }
 
 searchAppliance.addEventListener(('click'), openAppliance);
 openSearchAppliance.addEventListener(('click'), openAppliance);
+
+searchAppliance.addEventListener(('input'), e => {
+    searchStringAppliance = e.target.value.toLowerCase();
+    if(searchString.length >= 3 && searchStringAppliance.length >= 1) {
+        datasFiltered = filterAppliance(datasFiltered, searchStringAppliance);
+        displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    else if (searchString.length >= 3) {
+        displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    else if (searchStringAppliance.length >= 1) {
+        datasFiltered = filterAppliance(recipes, searchStringAppliance);
+        displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
+    }
+    else if (searchStringAppliance.length === 0) {
+        displayAppliance(recipes, searchAppliance, listAppliance, searchStringAppliance);
+    }
+})
+
+listAppliance.addEventListener(('click'), e => {
+    displayTagAppliance(e, listAppliance, angleUpAppliance, filterViewAppliance, selectedTagAppliance, filterView);
+    datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
+    displayCard(datasFiltered);
+    
+    if (searchString.length <= 3 && datasFiltered.length === 0) {
+        datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
+        displayCard(datasFiltered);
+    }
+    else {
+        datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
+        displayCard(datasFiltered);
+    }
+
+    linkTagCloseApps = document.querySelectorAll('.close_tag_app');
+    tagTextApps = document.querySelectorAll('.tag_text_app');
+    viewApp = document.querySelector('.view_app');
+
+    linkTagCloseApps.forEach(linkTagCloseApp => linkTagCloseApp.addEventListener('click', e => {
+        tagTextApps.forEach(tagTextApp => tagTextApp.addEventListener('click', e => {
+            let text = tagTextApp.innerText.toLowerCase();
+            text = text.substring(0, text.length - 1);
+            selectedTagAppliance = selectedTagAppliance.filter(item => item !== text);
+            tagTextApp.style.display = 'none';
+
+            if (searchString.length < 3 && selectedTagAppliance.length === 0) {
+                datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
+                displayCard(datasFiltered);
+            }
+            else if (searchString.length >= 3 && selectedTagAppliance.length === 0) {
+                datasFiltered = filterCard(recipes, searchString);
+                displayCard(datasFiltered);
+            }
+            else if (searchString.length < 3 && selectedTagAppliance.length > 0) {
+                datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
+                displayCard(datasFiltered);
+            }
+
+            if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0) {
+                angleDownAppliance.style.top = "320px";
+                angleUpAppliance.style.top = '320px';
+                filterView.style.height = 0;
+                filterView.style.width = 0;
+                listAppliance.style.top = '360px';
+                viewApp.style.display = 'none';
+            }
+        }));
+    }));
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients);
+})
+
+closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients));

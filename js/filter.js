@@ -22,3 +22,15 @@ export function filterTagsIngredients(datas, selectedTagIngredients) {
     }
     return datas;
 }
+
+export function filterAppliance(datas, searchStringAppliance) {
+    datas = datas.filter(data => data.appliance.toLowerCase().includes(searchStringAppliance));
+    return datas;
+}
+
+export function filterTagAppliance(datas, selectedTagAppliance) {
+    for (let i = 0; i < selectedTagAppliance.length; i++) {
+        datas = datas.filter(data => data.appliance.toLowerCase().includes(selectedTagAppliance[i]));
+    }
+    return datas;
+}

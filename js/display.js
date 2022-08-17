@@ -93,14 +93,16 @@ export function displayListIngredient(e, angleDownIngredients, angleUpIngredient
     filterContainerIngredients.appendChild(closeSearchIngredients);
 }
 
-export function displayTagIngredient(e, listIngredients, angleUpIngredients, filterViewIngredients, selectedTagIngredients, filterView) {
+export function displayTagIngredient(e, listIngredients, angleDownIngredients, filterViewIngredients, selectedTagIngredients, filterView) {
     filterView.style.height = '46.5px';
+    filterView.style.width = '100%';
     listIngredients.style.top = '410px';
-    angleUpIngredients.style.top = '360px';
+    angleDownIngredients.style.top = '360px';
+    filterViewIngredients.style.display = 'flex';
     filterViewIngredients.className = 'view_ing';
     selectedTagIngredients.push(e.target.textContent.toLowerCase());
 
-    filterViewIngredients.innerHTML += `<p class='tag_text_ing'>${e.target.textContent}
+    filterViewIngredients.innerHTML += `    <p class='tag_text_ing'>${e.target.textContent}
                                                 <a class="close_tag_ing">
                                                     <i class="fa-regular fa-circle-xmark"></i>
                                                 </a>
@@ -108,9 +110,9 @@ export function displayTagIngredient(e, listIngredients, angleUpIngredients, fil
     filterView.appendChild(filterViewIngredients);
 }
 
-export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients) {
-    angleDownIngredients.style.display = 'flex';
-    if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
+export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance) {
+    angleDownIngredients.style.display = 'block';
+    if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined' && selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined') {
         angleDownIngredients.style.top = '320px';
     }
     else {
@@ -125,18 +127,26 @@ export function closeListIngredient(e, angleDownIngredients, angleUpIngredients,
 }
 
 // Appliance display function
-export function displayAppliance(dataAppliance, searchAppliance, listAppliance) {
+export function displayAppliance(dataAppliance, searchAppliance, listAppliance, searchStringAppliance) {
+    let tableauAppliance = [];
+    let appliance = [];
+
     searchAppliance.setAttribute('class', 'filter_search_list appliance');
     searchAppliance.setAttribute('placeholder', 'Rechercher un appareils');
     listAppliance.innerHTML = ``;
 
     dataAppliance.forEach((data) => {
-        let appliance = data.appliance;
+        appliance.push(data.appliance);
+    })
+
+    appliance = appliance.filter(applianceFilter => applianceFilter.toLowerCase().includes(searchStringAppliance));
+    tableauAppliance = Array.from(new Set(appliance))
+    tableauAppliance.forEach((appliance) => {
         listAppliance.innerHTML += `<div><a class="link_appliance"><p>${appliance}</p><a></div>`;
     })
 }
 
-export function displayListAppliance (e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance) {
+export function displayListAppliance(e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance) {
     angleDownAppliance.style.display = 'none';
     angleUpAppliance.style.display = 'block';
     angleUpAppliance.setAttribute('class', 'fa-solid fa-angle-up');
@@ -146,4 +156,37 @@ export function displayListAppliance (e, angleDownAppliance, angleUpAppliance, f
 
     closeSearchAppliance.appendChild(angleUpAppliance);
     filterContainerAppliance.appendChild(closeSearchAppliance);
+}
+
+export function displayTagAppliance(e, listAppliance, angleUpAppliance, filterViewAppliance, selectedTagAppliance, filterView) {
+    filterView.style.width = '100%';
+    filterView.style.height = '46.5px';
+    listAppliance.style.top = '410px';
+    angleUpAppliance.style.top = '360px';
+    filterViewAppliance.style.display = 'flex';
+    filterViewAppliance.className = 'view_app';
+    selectedTagAppliance.push(e.target.textContent.toLowerCase());
+
+    filterViewAppliance.innerHTML += `  <p class='tag_text_app'>${e.target.textContent}
+                                            <a class="close_tag_app">
+                                                <i class="fa-regular fa-circle-xmark"></i>
+                                            </a>
+                                        </p>`
+    filterView.appendChild(filterViewAppliance);
+}
+
+export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients) {
+    angleDownAppliance.style.display = 'block';
+    if(selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined' && selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
+        angleDownAppliance.style.top = '320px';
+    }
+    else {
+        angleDownAppliance.style.top = '370px';
+    }
+    angleUpAppliance.style.display = 'none';
+    searchAppliance.setAttribute('class', 'filter_search appliance');
+    searchAppliance.setAttribute('placeholder', 'Appareils');
+    searchAppliance.value = '';
+    listAppliance.innerHTML = ``;
+    filterContainerAppliance.style.width = 'auto';
 }
