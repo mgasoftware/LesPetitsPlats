@@ -110,9 +110,10 @@ export function displayTagIngredient(e, listIngredients, angleDownIngredients, f
     filterView.appendChild(filterViewIngredients);
 }
 
-export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance) {
+export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance) {
+    angleDownAppliance.style.left = '430px';
     angleDownIngredients.style.display = 'block';
-    if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined' && selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined') {
+    if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
         angleDownIngredients.style.top = '320px';
     }
     else {
@@ -175,9 +176,9 @@ export function displayTagAppliance(e, listAppliance, angleUpAppliance, filterVi
     filterView.appendChild(filterViewAppliance);
 }
 
-export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients) {
+export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance) {
     angleDownAppliance.style.display = 'block';
-    if(selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined' && selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
+    if(selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined') {
         angleDownAppliance.style.top = '320px';
     }
     else {

@@ -48,6 +48,10 @@ const filterViewAppliance = document.createElement('div');
 displayCard(recipes);
 
 // Main search function
+searchInputMain.addEventListener(('click'), e => {
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
+})
 searchInputMain.addEventListener(('input'), e => {
     searchString = e.target.value.toLowerCase();
     if (searchString.length >= 3 && datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
@@ -65,7 +69,7 @@ searchInputMain.addEventListener(('input'), e => {
         datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
         displayCard(datasFiltered);
     }
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
 })
 
 // Ingredients function
@@ -81,6 +85,8 @@ const openIngredient = e => {
     else {
         displayIngredients(datasFiltered);
     }
+    angleDownAppliance.style.left = '900px';
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
 }
 
 searchIngredients.addEventListener(('click'), openIngredient);
@@ -120,8 +126,13 @@ listIngredients.addEventListener(('click'), e => {
     tagTextIngs = document.querySelectorAll('.tag_text_ing');
     viewIng =  document.querySelector('.view_ing');
 
+    angleDownAppliance.style.top = '370px';
+
     linkTagCloseIngs.forEach(linkTagCloseIng => linkTagCloseIng.addEventListener('click', e => {
         tagTextIngs.forEach(tagTextIng => tagTextIng.addEventListener('click', e => {
+            if(selectedTagAppliance.length === 0) {
+                angleDownAppliance.style.top = '320px';
+            }
             let text = tagTextIng.innerText.toLowerCase();
             text = text.substring(0, text.length - 1);
             selectedTagIngredients = selectedTagIngredients.filter(item => item !== text);
@@ -140,21 +151,20 @@ listIngredients.addEventListener(('click'), e => {
                 displayCard(datasFiltered);
             }
 
-            // if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
-            //     angleDownIngredients.style.top = '320px';
-            //     angleUpIngredients.style.top = '320px';
-            //     filterView.style.width = 0;
-            //     filterView.style.height = 0;
-            //     listIngredients.style.top = '360px';
-            //     viewIng.style.display = 'none';
-            // }
+            if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
+                angleDownIngredients.style.top = '320px';
+                angleUpIngredients.style.top = '320px';
+                filterView.style.width = 0;
+                filterView.style.height = 0;
+                listIngredients.style.top = '360px';
+                viewIng.style.display = 'none';
+            }
         }));
     }));
-
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
 })
 
-closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance));
+closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance));
 
 // Appliance function
 const openAppliance = e => {
@@ -168,7 +178,7 @@ const openAppliance = e => {
     else {
         displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
     }
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, selectedTagAppliance);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagAppliance, angleDownAppliance);
 }
 
 searchAppliance.addEventListener(('click'), openAppliance);
@@ -210,8 +220,13 @@ listAppliance.addEventListener(('click'), e => {
     tagTextApps = document.querySelectorAll('.tag_text_app');
     viewApp = document.querySelector('.view_app');
 
+    angleDownIngredients.style.top = '370px';
+
     linkTagCloseApps.forEach(linkTagCloseApp => linkTagCloseApp.addEventListener('click', e => {
         tagTextApps.forEach(tagTextApp => tagTextApp.addEventListener('click', e => {
+            if(selectedTagIngredients.length === 0) {
+                angleDownIngredients.style.top = '320px';
+            }
             let text = tagTextApp.innerText.toLowerCase();
             text = text.substring(0, text.length - 1);
             selectedTagAppliance = selectedTagAppliance.filter(item => item !== text);
@@ -240,7 +255,7 @@ listAppliance.addEventListener(('click'), e => {
             }
         }));
     }));
-    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients);
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
 })
 
-closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, selectedTagIngredients));
+closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance));
