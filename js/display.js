@@ -1,3 +1,4 @@
+// Main display card function
 export function displayCard(datas) {
     const cardShow = document.querySelector('.main_container');
     cardShow.innerHTML = ``;
@@ -36,6 +37,7 @@ export function displayCard(datas) {
     });
 }
 
+// Ingredients display function
 export function displayIngredients(dataIngredients) {
     const searchIngredients = document.getElementById('search_ingredients');
     const listIngredients = document.getElementById('list_ingredients');
@@ -79,21 +81,22 @@ export function displayFilterIngredients(dataIngredients, e) {
 
 }
 
-export function displayListIngredient(e, faAngleDown, faAngleUp, filterContainerIngredients, closeSearchIngredients) {
-    faAngleDown.style.display = 'none';
-    faAngleUp.style.display = 'block';
-    faAngleUp.setAttribute('class', 'fa-solid fa-angle-up');
+export function displayListIngredient(e, angleDownIngredients, angleUpIngredients, filterContainerIngredients, closeSearchIngredients) {
+    angleDownIngredients.style.display = 'none';
+    angleUpIngredients.style.display = 'block';
+    angleUpIngredients.setAttribute('class', 'fa-solid fa-angle-up');
+    angleUpIngredients.setAttribute('id', 'angle-up-ingredients');
     filterContainerIngredients.style.width = '667px';
     closeSearchIngredients.setAttribute('class', 'close_search_ingredients');
 
-    closeSearchIngredients.appendChild(faAngleUp);
+    closeSearchIngredients.appendChild(angleUpIngredients);
     filterContainerIngredients.appendChild(closeSearchIngredients);
 }
 
-export function displayTagIngredient(e, listIngredients, faAngleUp, filterViewIngredients, selectedTagIngredients, filterView) {
+export function displayTagIngredient(e, listIngredients, angleUpIngredients, filterViewIngredients, selectedTagIngredients, filterView) {
     filterView.style.height = '46.5px';
     listIngredients.style.top = '410px';
-    faAngleUp.style.top = '360px';
+    angleUpIngredients.style.top = '360px';
     filterViewIngredients.className = 'view_ing';
     selectedTagIngredients.push(e.target.textContent.toLowerCase());
 
@@ -105,18 +108,42 @@ export function displayTagIngredient(e, listIngredients, faAngleUp, filterViewIn
     filterView.appendChild(filterViewIngredients);
 }
 
-export function closeListIngredient(e, faAngleDown, faAngleUp, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients) {
-    faAngleDown.style.display = 'flex';
+export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients) {
+    angleDownIngredients.style.display = 'flex';
     if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
-        faAngleDown.style.top = '320px';
+        angleDownIngredients.style.top = '320px';
     }
     else {
-        faAngleDown.style.top = '370px';
+        angleDownIngredients.style.top = '370px';
     }
-    faAngleUp.style.display = 'none';
+    angleUpIngredients.style.display = 'none';
     searchIngredients.setAttribute('class', 'filter_search ingredients');
     searchIngredients.setAttribute('placeholder', 'Ingredients');
     searchIngredients.value = '';
     listIngredients.innerHTML = ``;
     filterContainerIngredients.style.width = 'auto';
+}
+
+// Appliance display function
+export function displayAppliance(dataAppliance, searchAppliance, listAppliance) {
+    searchAppliance.setAttribute('class', 'filter_search_list appliance');
+    searchAppliance.setAttribute('placeholder', 'Rechercher un appareils');
+    listAppliance.innerHTML = ``;
+
+    dataAppliance.forEach((data) => {
+        let appliance = data.appliance;
+        listAppliance.innerHTML += `<div><a class="link_appliance"><p>${appliance}</p><a></div>`;
+    })
+}
+
+export function displayListAppliance (e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance) {
+    angleDownAppliance.style.display = 'none';
+    angleUpAppliance.style.display = 'block';
+    angleUpAppliance.setAttribute('class', 'fa-solid fa-angle-up');
+    angleUpAppliance.setAttribute('id', 'angle-up-appliance');
+    filterContainerAppliance.style.width = '667px';
+    closeSearchAppliance.setAttribute('class', 'close_search_appliance');
+
+    closeSearchAppliance.appendChild(angleUpAppliance);
+    filterContainerAppliance.appendChild(closeSearchAppliance);
 }
