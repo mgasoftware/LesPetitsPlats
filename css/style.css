@@ -113,13 +113,30 @@ input {
     background: #68D9A4;
 }
 
+.view_usts {
+    display: flex;
+    min-width: 107px;
+    min-height: 37px;
+}
+
+.view_usts p{
+    height: 100%;
+    border-radius: 5px;
+    margin-right: 10px;
+    padding-top: 10px ;
+    padding-left: 20px;
+    padding-right: 13px;
+    background: #ED6454;
+}
+
 .fa-circle-xmark {
     color: white;
     font-size: 20px;
 }
 
 .close_tag_ing,
-.close_tag_app {
+.close_tag_app,
+.close_tag_usts {
     cursor: pointer;
     padding-left: 13px;
 }
@@ -135,6 +152,12 @@ input {
 }
 
 .filter_container_appliance {
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.filter_container_ustensils {
     display: flex;
     flex-direction: column;
     border-radius: 5px;
@@ -170,10 +193,27 @@ input {
     color: white;
 }
 
+#angle-down-ustensils {
+    position: absolute;
+    left: 620px;
+    top: 320px;
+    color: white;
+}
+
+#angle-up-ustensils {
+    display: none;
+    position: absolute;
+    left: 1100px;
+    top: 320px;
+    color: white;
+}
+
 .close_search_ingredients,
 .open_search_ingredients,
 .close_search_appliance,
-.open_search_appliance {
+.open_search_appliance,
+.close_search_ustensils,
+.open_search_ustensils {
     cursor: pointer;
 }
 
@@ -229,6 +269,19 @@ input {
 }
 
 .list_appliance {
+    width: 647px;
+    z-index: 2;
+    position: absolute;
+    top: 360px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr;
+    gap: 0px;
+    margin-bottom: 0px;
+    padding-left: 19px;
+    color: #FFFFFF;
+}
+
+.list_ustensils {
     width: 647px;
     z-index: 2;
     position: absolute;

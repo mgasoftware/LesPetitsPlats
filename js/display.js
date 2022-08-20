@@ -191,3 +191,71 @@ export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, sear
     listAppliance.innerHTML = ``;
     filterContainerAppliance.style.width = 'auto';
 }
+
+//Ustenils display function
+export function displayUstensils(dataUstensils, searchUstensils, listUstensils, searchStringUstensils) {
+    let tableauUstensils = [];
+
+    searchUstensils.setAttribute('class', 'filter_search_list ustensils');
+    searchUstensils.setAttribute('placeholder', 'Rechercher un ustensils');
+    listUstensils.innerHTML = ``;
+
+    dataUstensils.forEach((data) => {
+        let ustensils = data.ustensils;
+        ustensils = ustensils.filter(ustensilsFilter => ustensilsFilter.toLowerCase().includes(searchStringUstensils));
+        Object.values(ustensils).forEach(val => {
+            tableauUstensils.push(val);
+        })
+    })
+
+    tableauUstensils = Array.from(new Set(tableauUstensils));
+    tableauUstensils.forEach((ustensils) => {
+        listUstensils.innerHTML += `<div><a class="link_ustensils"><p>${ustensils}</p><a></div>`
+    });
+}
+
+export function displayListUstensils(e, angleDownUstensils, angleUpUstensils, filterContainerUstensils, closeSearchUstensils) {
+    angleDownUstensils.style.display = 'none';
+    angleUpUstensils.style.display = 'block';
+    angleUpUstensils.setAttribute('class', 'fa-solid fa-angle-up');
+    angleUpUstensils.setAttribute('id', 'angle-up-ustensils');
+    filterContainerUstensils.style.width = '667px';
+    closeSearchUstensils.setAttribute('class', 'close_search_ustensils');
+
+    closeSearchUstensils.appendChild(angleUpUstensils);
+    filterContainerUstensils.appendChild(closeSearchUstensils);
+}
+
+export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
+    filterView.style.width = '100%';
+    filterView.style.height = '46.5px';
+    listUstensils.style.top = '410px';
+    angleUpUstensils.style.top = '360px';
+    filterViewUstensils.style.display = 'flex';
+    filterViewUstensils.className = 'view_usts';
+    selectedTagUstensils.push(e.target.textContent.toLowerCase());
+
+    filterViewUstensils.innerHTML += `  <p class='tag_text_usts'>${e.target.textContent}
+                                            <a class="close_tag_usts">
+                                                <i class="fa-regular fa-circle-xmark"></i>
+                                            </a>
+                                        </p>`
+
+    filterView.appendChild(filterViewUstensils);
+}
+
+export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils) {
+    angleDownUstensils.style.display = 'block';
+    if(selectedTagUstensils.length === 0 || typeof (selectedTagUstensils) === 'undefined') {
+        angleDownUstensils.style.top = '320px';
+    }
+    else {
+        angleDownUstensils.style.top = '370px';
+    }
+    angleUpUstensils.style.display = 'none';
+    searchUstensils.setAttribute('class', 'filter_search ustensils');
+    searchUstensils.setAttribute('placeholder', 'Ustensiles');
+    searchUstensils.value = '';
+    listUstensils.innerHTML = ``;
+    filterContainerUstensils.style.width = 'auto';
+}

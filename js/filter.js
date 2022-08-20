@@ -34,3 +34,19 @@ export function filterTagAppliance(datas, selectedTagAppliance) {
     }
     return datas;
 }
+
+export function filterUstensils(datas, searchStringUstensils) {
+    datas = datas.filter(data => data.ustensils.find(el => {
+        return el.toLowerCase().includes(searchStringUstensils);
+    }));
+    return datas;
+}
+
+export function filterTagUstensils(datas, selectedTagUstensils) {
+    for(let i = 0; i < selectedTagUstensils.length; i++) {
+        datas = datas.filter(data => data.ustensils.find(el => {
+            return el.toLowerCase().includes(selectedTagUstensils[i]);
+        }));
+    }
+    return datas;
+}
