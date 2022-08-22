@@ -80,7 +80,7 @@ searchInputMain.addEventListener(('click'), e => {
 })
 searchInputMain.addEventListener(('input'), e => {
     searchString = e.target.value.toLowerCase();
-    if (searchString.length >= 3 && datasFiltered.length === 0 && selectedTagIngredients.length === 0) {
+    if (searchString.length >= 3 && datasFiltered.length === 0 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterCard(recipes, searchString);
         displayCard(datasFiltered);
     }
@@ -88,11 +88,21 @@ searchInputMain.addEventListener(('input'), e => {
         datasFiltered = filterCard(datasFiltered, searchString);
         displayCard(datasFiltered);
     }
-    else if (searchString.length === 0 && datasFiltered.length === 0 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
-        displayCard(recipes);
+    else if (searchString.length === 0 && datasFiltered.length === 0) {
+        datasFiltered = filterIngredients(recipes, selectedTagIngredients);
+        datasFiltered = filterAppliance(datasFiltered, selectedTagAppliance);
+        datasFiltered = filterUstensils(datasFiltered, selectedTagUstensils);
+        displayCard(datasFiltered);
     }
-    else if (searchString.length < 3 && selectedTagIngredients.length >= 0) {
-        datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
+    else if (selectedTagIngredients.length > 0 || selectedTagAppliance.length > 0 || selectedTagUstensils.length > 0) {
+        datasFiltered = filterCard(recipes, searchString);
+        datasFiltered = filterIngredients(datasFiltered, selectedTagIngredients);
+        datasFiltered = filterAppliance(datasFiltered, selectedTagAppliance);
+        datasFiltered = filterUstensils(datasFiltered, selectedTagUstensils);
+        displayCard(datasFiltered);
+    }
+    else if (searchString.length < 3 && selectedTagIngredients.length > 0 && selectedTagAppliance.length > 0 && selectedTagUstensils.length > 0) {
+        datasFiltered = filterCard(datasFiltered, searchString);
         displayCard(datasFiltered);
     }
 })
@@ -154,7 +164,7 @@ listIngredients.addEventListener(('click'), e => {
     tagTextIngs = document.querySelectorAll('.tag_text_ing');
     viewIng = document.querySelector('.view_ing');
 
-    
+
     angleDownIngredients.style.top = '370px';
     angleUpIngredients.style.top = '370px';
     angleDownAppliance.style.top = "370px";
@@ -172,16 +182,25 @@ listIngredients.addEventListener(('click'), e => {
             tagTextIng.style.display = 'none';
 
             if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
+                console.log('boucle 1 ing');
                 datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
                 displayCard(datasFiltered);
             }
             else if (searchString.length >= 3 && selectedTagIngredients.length === 0) {
+                console.log('boucle 2 ing');
                 datasFiltered = filterCard(recipes, searchString);
                 displayCard(datasFiltered);
             }
-            else if (searchString.length < 3 && selectedTagIngredients.length > 0) {
+            else {
+                console.log('boucle 3 ing');
                 datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
+                datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
+                datasFiltered = filterTagUstensils(datasFiltered, selectedTagUstensils);
                 displayCard(datasFiltered);
+            }
+
+            if (selectedTagIngredients.length === 0) {
+                viewIng.style.display = 'none';
             }
 
             if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
@@ -196,9 +215,6 @@ listIngredients.addEventListener(('click'), e => {
                 angleDownUstensils.style.top = '320px';
                 angleUpUstensils.style.top = '320px';
                 listUstensils.style.top = '360px';
-                viewApp.style.display = 'none';
-                viewIng.style.display = 'none';
-                viewUsts.style.display = 'none';
             }
         }));
     }));
@@ -249,10 +265,12 @@ listAppliance.addEventListener(('click'), e => {
     displayTagAppliance(e, listAppliance, angleDownAppliance, filterViewAppliance, selectedTagAppliance, filterView);
 
     if (searchString.length <= 3 && datasFiltered.length === 0) {
+        console.log('boucle 1 app');
         datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
         displayCard(datasFiltered);
     }
     else {
+        console.log('boucle 2 app');
         datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
         displayCard(datasFiltered);
     }
@@ -261,8 +279,8 @@ listAppliance.addEventListener(('click'), e => {
     tagTextApps = document.querySelectorAll('.tag_text_app');
     viewApp = document.querySelector('.view_app');
 
-    
-    
+
+
     angleDownIngredients.style.top = '370px';
     angleUpIngredients.style.top = '370px';
     angleDownAppliance.style.top = "370px";
@@ -274,14 +292,15 @@ listAppliance.addEventListener(('click'), e => {
 
     linkTagCloseApps.forEach(linkTagCloseApp => linkTagCloseApp.addEventListener('click', e => {
         tagTextApps.forEach(tagTextApp => tagTextApp.addEventListener('click', e => {
-            if (selectedTagIngredients.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleDownUstensils.style.top = '320px';
-            }
             let text = tagTextApp.innerText.toLowerCase();
             text = text.substring(0, text.length - 1);
             selectedTagAppliance = selectedTagAppliance.filter(item => item !== text);
             tagTextApp.style.display = 'none';
+
+
+            if (selectedTagAppliance.length === 0) {
+                viewApp.style.display = 'none';
+            }
 
             if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
                 datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
@@ -291,8 +310,10 @@ listAppliance.addEventListener(('click'), e => {
                 datasFiltered = filterCard(recipes, searchString);
                 displayCard(datasFiltered);
             }
-            else if (searchString.length < 3 && selectedTagAppliance.length > 0) {
+            else {
                 datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
+                datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
+                datasFiltered = filterTagUstensils(datasFiltered, selectedTagUstensils);
                 displayCard(datasFiltered);
             }
 
@@ -308,9 +329,6 @@ listAppliance.addEventListener(('click'), e => {
                 angleDownUstensils.style.top = '320px';
                 angleUpUstensils.style.top = '320px';
                 listUstensils.style.top = '360px';
-                viewApp.style.display = 'none';
-                viewIng.style.display = 'none';
-                viewUsts.style.display = 'none';
             }
         }));
     }));
@@ -372,7 +390,7 @@ listUstensils.addEventListener(('click'), e => {
     tagTextUsts = document.querySelectorAll('.tag_text_usts');
     viewUsts = document.querySelector('.view_usts');
 
-    
+
     angleDownIngredients.style.top = '370px';
     angleUpIngredients.style.top = '370px';
     angleDownAppliance.style.top = "370px";
@@ -397,9 +415,15 @@ listUstensils.addEventListener(('click'), e => {
                 datasFiltered = filterCard(recipes, searchString);
                 displayCard(datasFiltered);
             }
-            else if (searchString.length < 3 && selectedTagUstensils.length > 0) {
+            else {
                 datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
+                datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
+                datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
                 displayCard(datasFiltered);
+            }
+
+            if (selectedTagUstensils.length === 0) {
+                viewUsts.style.display = 'none';
             }
 
             if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
@@ -414,9 +438,6 @@ listUstensils.addEventListener(('click'), e => {
                 angleDownUstensils.style.top = '320px';
                 angleUpUstensils.style.top = '320px';
                 listUstensils.style.top = '360px';
-                viewApp.style.display = 'none';
-                viewIng.style.display = 'none';
-                viewUsts.style.display = 'none';
             }
         }));
     }));
