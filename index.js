@@ -75,8 +75,8 @@ displayCard(recipes);
 // Main search function
 searchInputMain.addEventListener(('click'), e => {
     closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils);
-    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils);
 })
 searchInputMain.addEventListener(('input'), e => {
     searchString = e.target.value.toLowerCase();
@@ -110,10 +110,11 @@ const openIngredient = e => {
     else {
         displayIngredients(datasFiltered);
     }
-    angleDownAppliance.style.left = '900px';
-    listAppliance.style.top = '410px';
-    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils);
     closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils);
+
+    angleDownAppliance.style.left = '900px';
+    angleDownUstensils.style.left = '1100px';
 }
 
 searchIngredients.addEventListener(('click'), openIngredient);
@@ -153,19 +154,24 @@ listIngredients.addEventListener(('click'), e => {
     tagTextIngs = document.querySelectorAll('.tag_text_ing');
     viewIng = document.querySelector('.view_ing');
 
-    angleDownAppliance.style.top = '370px';
+    
+    angleDownIngredients.style.top = '370px';
+    angleUpIngredients.style.top = '370px';
+    angleDownAppliance.style.top = "370px";
+    angleUpAppliance.style.top = '370px';
+    angleDownUstensils.style.top = '370px';
+    angleUpUstensils.style.top = '370px';
+    listAppliance.style.top = '410px';
+    listUstensils.style.top = '410px';
 
     linkTagCloseIngs.forEach(linkTagCloseIng => linkTagCloseIng.addEventListener('click', e => {
         tagTextIngs.forEach(tagTextIng => tagTextIng.addEventListener('click', e => {
-            if (selectedTagAppliance.length === 0) {
-                angleDownAppliance.style.top = '320px';
-            }
             let text = tagTextIng.innerText.toLowerCase();
             text = text.substring(0, text.length - 1);
             selectedTagIngredients = selectedTagIngredients.filter(item => item !== text);
             tagTextIng.style.display = 'none';
 
-            if (searchString.length < 3 && selectedTagIngredients.length === 0) {
+            if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
                 datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
                 displayCard(datasFiltered);
             }
@@ -178,23 +184,28 @@ listIngredients.addEventListener(('click'), e => {
                 displayCard(datasFiltered);
             }
 
-            if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0) {
+            if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
                 angleDownIngredients.style.top = '320px';
                 angleUpIngredients.style.top = '320px';
                 filterView.style.width = 0;
                 filterView.style.height = 0;
                 listIngredients.style.top = '360px';
-                viewIng.style.display = 'none';
                 angleDownAppliance.style.top = "320px";
                 angleUpAppliance.style.top = '320px';
                 listAppliance.style.top = '360px';
+                angleDownUstensils.style.top = '320px';
+                angleUpUstensils.style.top = '320px';
+                listUstensils.style.top = '360px';
+                viewApp.style.display = 'none';
+                viewIng.style.display = 'none';
+                viewUsts.style.display = 'none';
             }
         }));
     }));
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils);
 })
 
-closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance));
+closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils));
 
 // Appliance function
 const openAppliance = e => {
@@ -208,7 +219,9 @@ const openAppliance = e => {
     else {
         displayAppliance(datasFiltered, searchAppliance, listAppliance, searchStringAppliance);
     }
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagAppliance, angleDownAppliance);
+    closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagAppliance, angleDownAppliance, angleDownUstensils);
+    angleDownUstensils.style.left = '1100px';
 }
 
 searchAppliance.addEventListener(('click'), openAppliance);
@@ -233,7 +246,7 @@ searchAppliance.addEventListener(('input'), e => {
 })
 
 listAppliance.addEventListener(('click'), e => {
-    displayTagAppliance(e, listAppliance, angleUpAppliance, filterViewAppliance, selectedTagAppliance, filterView);
+    displayTagAppliance(e, listAppliance, angleDownAppliance, filterViewAppliance, selectedTagAppliance, filterView);
 
     if (searchString.length <= 3 && datasFiltered.length === 0) {
         datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
@@ -248,7 +261,17 @@ listAppliance.addEventListener(('click'), e => {
     tagTextApps = document.querySelectorAll('.tag_text_app');
     viewApp = document.querySelector('.view_app');
 
+    
+    
     angleDownIngredients.style.top = '370px';
+    angleUpIngredients.style.top = '370px';
+    angleDownAppliance.style.top = "370px";
+    angleUpAppliance.style.top = '370px';
+    angleDownUstensils.style.top = '370px';
+    angleUpUstensils.style.top = '370px';
+    listIngredients.style.top = '410px';
+    listUstensils.style.top = '410px';
+
     linkTagCloseApps.forEach(linkTagCloseApp => linkTagCloseApp.addEventListener('click', e => {
         tagTextApps.forEach(tagTextApp => tagTextApp.addEventListener('click', e => {
             if (selectedTagIngredients.length === 0) {
@@ -260,7 +283,7 @@ listAppliance.addEventListener(('click'), e => {
             selectedTagAppliance = selectedTagAppliance.filter(item => item !== text);
             tagTextApp.style.display = 'none';
 
-            if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients === 0) {
+            if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
                 datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
                 displayCard(datasFiltered);
             }
@@ -273,7 +296,7 @@ listAppliance.addEventListener(('click'), e => {
                 displayCard(datasFiltered);
             }
 
-            if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0) {
+            if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
                 angleDownIngredients.style.top = '320px';
                 angleUpIngredients.style.top = '320px';
                 filterView.style.width = 0;
@@ -282,14 +305,19 @@ listAppliance.addEventListener(('click'), e => {
                 angleDownAppliance.style.top = "320px";
                 angleUpAppliance.style.top = '320px';
                 listAppliance.style.top = '360px';
+                angleDownUstensils.style.top = '320px';
+                angleUpUstensils.style.top = '320px';
+                listUstensils.style.top = '360px';
                 viewApp.style.display = 'none';
+                viewIng.style.display = 'none';
+                viewUsts.style.display = 'none';
             }
         }));
     }));
-    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils);
 })
 
-closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance));
+closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils));
 
 //Ustensils function
 const openUstensils = e => {
@@ -304,8 +332,8 @@ const openUstensils = e => {
     else {
         displayUstensils(datasFiltered, searchUstensils, listUstensils, searchStringUstensils);
     }
-    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance);
-    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance);
+    closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils);
+    closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils);
 }
 
 searchUstensils.addEventListener(('click'), openUstensils);
@@ -330,7 +358,7 @@ searchUstensils.addEventListener(('input'), e => {
 })
 
 listUstensils.addEventListener(('click'), e => {
-    displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView);
+    displayTagUstensils(e, listUstensils, angleDownUstensils, filterViewUstensils, selectedTagUstensils, filterView);
     if (searchString.length <= 3 && datasFiltered.length === 0) {
         datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
         displayCard(datasFiltered);
@@ -344,30 +372,32 @@ listUstensils.addEventListener(('click'), e => {
     tagTextUsts = document.querySelectorAll('.tag_text_usts');
     viewUsts = document.querySelector('.view_usts');
 
+    
+    angleDownIngredients.style.top = '370px';
+    angleUpIngredients.style.top = '370px';
+    angleDownAppliance.style.top = "370px";
+    angleUpAppliance.style.top = '370px';
     angleDownUstensils.style.top = '370px';
+    angleUpUstensils.style.top = '370px';
+    listIngredients.style.top = '410px';
+    listAppliance.style.top = '410px';
+
     linkTagCloseUsts.forEach(linkTagCloseUst => linkTagCloseUst.addEventListener('click', e => {
         tagTextUsts.forEach(tagTextUst => tagTextUst.addEventListener('click', e => {
-            if (selectedTagUstensils.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleDownAppliance.style.top = '320px';
-            }
             let text = tagTextUst.innerText.toLowerCase();
             text = text.substring(0, text.length - 1);
             selectedTagUstensils = selectedTagUstensils.filter(item => item !== text);
             tagTextUst.style.display = 'none';
 
-            if (searchString.length < 3 && selectedTagUstensils.length === 0) {
-                console.log('Boucle 1');
+            if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
                 datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
                 displayCard(datasFiltered);
             }
             else if (searchString.length >= 3 && selectedTagUstensils.length === 0) {
-                console.log('Boucle 2');
                 datasFiltered = filterCard(recipes, searchString);
                 displayCard(datasFiltered);
             }
             else if (searchString.length < 3 && selectedTagUstensils.length > 0) {
-                console.log('Boucle 3');
                 datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
                 displayCard(datasFiltered);
             }
@@ -381,9 +411,11 @@ listUstensils.addEventListener(('click'), e => {
                 angleDownAppliance.style.top = "320px";
                 angleUpAppliance.style.top = '320px';
                 listAppliance.style.top = '360px';
-                angleDownUstensils.style.top = '360px';
-                angleUpUstensils.style.top = '360px';
+                angleDownUstensils.style.top = '320px';
+                angleUpUstensils.style.top = '320px';
                 listUstensils.style.top = '360px';
+                viewApp.style.display = 'none';
+                viewIng.style.display = 'none';
                 viewUsts.style.display = 'none';
             }
         }));

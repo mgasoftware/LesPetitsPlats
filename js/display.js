@@ -97,7 +97,7 @@ export function displayTagIngredient(e, listIngredients, angleDownIngredients, f
     filterView.style.height = '46.5px';
     filterView.style.width = '100%';
     listIngredients.style.top = '410px';
-    angleDownIngredients.style.top = '360px';
+    angleDownIngredients.style.top = '370px';
     filterViewIngredients.style.display = 'flex';
     filterViewIngredients.className = 'view_ing';
     selectedTagIngredients.push(e.target.textContent.toLowerCase());
@@ -110,15 +110,13 @@ export function displayTagIngredient(e, listIngredients, angleDownIngredients, f
     filterView.appendChild(filterViewIngredients);
 }
 
-export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance) {
+export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils) {
     angleDownAppliance.style.left = '430px';
+    angleDownUstensils.style.left = '620px';
     angleDownIngredients.style.display = 'block';
-    if (selectedTagIngredients.length === 0 || typeof (selectedTagIngredients) === 'undefined') {
-        angleDownIngredients.style.top = '320px';
-    }
-    else {
-        angleDownIngredients.style.top = '370px';
-    }
+
+    angleUpIngredients.style.top = '370px';
+
     angleUpIngredients.style.display = 'none';
     searchIngredients.setAttribute('class', 'filter_search ingredients');
     searchIngredients.setAttribute('placeholder', 'Ingredients');
@@ -159,11 +157,11 @@ export function displayListAppliance(e, angleDownAppliance, angleUpAppliance, fi
     filterContainerAppliance.appendChild(closeSearchAppliance);
 }
 
-export function displayTagAppliance(e, listAppliance, angleUpAppliance, filterViewAppliance, selectedTagAppliance, filterView) {
+export function displayTagAppliance(e, listAppliance, angleDownAppliance, filterViewAppliance, selectedTagAppliance, filterView) {
     filterView.style.width = '100%';
     filterView.style.height = '46.5px';
     listAppliance.style.top = '410px';
-    angleUpAppliance.style.top = '360px';
+    angleDownAppliance.style.top = '370px';
     filterViewAppliance.style.display = 'flex';
     filterViewAppliance.className = 'view_app';
     selectedTagAppliance.push(e.target.textContent.toLowerCase());
@@ -176,14 +174,12 @@ export function displayTagAppliance(e, listAppliance, angleUpAppliance, filterVi
     filterView.appendChild(filterViewAppliance);
 }
 
-export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance) {
+export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils) {
     angleDownAppliance.style.display = 'block';
-    if(selectedTagAppliance.length === 0 || typeof (selectedTagAppliance) === 'undefined') {
-        angleDownAppliance.style.top = '320px';
-    }
-    else {
-        angleDownAppliance.style.top = '370px';
-    }
+    angleDownUstensils.style.left = '620px'
+
+    angleUpAppliance.style.top = '370px';
+
     angleUpAppliance.style.display = 'none';
     searchAppliance.setAttribute('class', 'filter_search appliance');
     searchAppliance.setAttribute('placeholder', 'Appareils');
@@ -226,11 +222,11 @@ export function displayListUstensils(e, angleDownUstensils, angleUpUstensils, fi
     filterContainerUstensils.appendChild(closeSearchUstensils);
 }
 
-export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
+export function displayTagUstensils(e, listUstensils, angleDownUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
     filterView.style.width = '100%';
     filterView.style.height = '46.5px';
     listUstensils.style.top = '410px';
-    angleUpUstensils.style.top = '360px';
+    angleDownUstensils.style.top = '370px';
     filterViewUstensils.style.display = 'flex';
     filterViewUstensils.className = 'view_usts';
     selectedTagUstensils.push(e.target.textContent.toLowerCase());
@@ -246,12 +242,9 @@ export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterVi
 
 export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils) {
     angleDownUstensils.style.display = 'block';
-    if(selectedTagUstensils.length === 0 || typeof (selectedTagUstensils) === 'undefined') {
-        angleDownUstensils.style.top = '320px';
-    }
-    else {
-        angleDownUstensils.style.top = '370px';
-    }
+
+    angleUpUstensils.style.top = '370px';
+
     angleUpUstensils.style.display = 'none';
     searchUstensils.setAttribute('class', 'filter_search ustensils');
     searchUstensils.setAttribute('placeholder', 'Ustensiles');
