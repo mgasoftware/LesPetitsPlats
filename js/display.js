@@ -37,7 +37,19 @@ export function displayCard(datas) {
     });
 }
 
-// Ingredients display function
+// Display error
+export function displayError(errorView) {
+    const main = document.querySelector('main');
+    const errorText = document.createElement('h1');
+
+    errorText.style.fontSize = '20px';
+    errorText.textContent = 'Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.';
+    errorView.appendChild(errorText);
+    main.appendChild(errorView)
+}
+// INGREDIENTS 
+
+// Display Ingredients on the ingredients list
 export function displayIngredients(dataIngredients) {
     const searchIngredients = document.getElementById('search_ingredients');
     const listIngredients = document.getElementById('list_ingredients');
@@ -60,6 +72,7 @@ export function displayIngredients(dataIngredients) {
 
 }
 
+//Display Ingredients on the igredients list with the filter
 export function displayFilterIngredients(dataIngredients, e) {
     const listIngredients = document.getElementById('list_ingredients');
     let tableauIngredient = [];
@@ -81,6 +94,7 @@ export function displayFilterIngredients(dataIngredients, e) {
 
 }
 
+//Display container of ingredients 
 export function displayListIngredient(e, angleDownIngredients, angleUpIngredients, filterContainerIngredients, closeSearchIngredients) {
     angleDownIngredients.style.display = 'none';
     angleUpIngredients.style.display = 'block';
@@ -93,6 +107,7 @@ export function displayListIngredient(e, angleDownIngredients, angleUpIngredient
     filterContainerIngredients.appendChild(closeSearchIngredients);
 }
 
+//Display tag of ingredients 
 export function displayTagIngredient(e, listIngredients, angleDownIngredients, filterViewIngredients, selectedTagIngredients, filterView) {
     filterView.style.height = '46.5px';
     filterView.style.width = '100%';
@@ -113,6 +128,7 @@ export function displayTagIngredient(e, listIngredients, angleDownIngredients, f
     }
 }
 
+//Close dom list ingredients
 export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils) {
     angleDownAppliance.style.left = '430px';
     angleDownUstensils.style.left = '620px';
@@ -126,7 +142,9 @@ export function closeListIngredient(e, angleDownIngredients, angleUpIngredients,
     filterContainerIngredients.style.width = 'auto';
 }
 
-// Appliance display function
+// APPLIANCE
+
+// Display appliance on the appliance list
 export function displayAppliance(dataAppliance, searchAppliance, listAppliance, searchStringAppliance) {
     let tableauAppliance = [];
     let appliance = [];
@@ -146,6 +164,7 @@ export function displayAppliance(dataAppliance, searchAppliance, listAppliance, 
     })
 }
 
+//Display container of ingredients
 export function displayListAppliance(e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance) {
     angleDownAppliance.style.display = 'none';
     angleUpAppliance.style.display = 'block';
@@ -158,6 +177,7 @@ export function displayListAppliance(e, angleDownAppliance, angleUpAppliance, fi
     filterContainerAppliance.appendChild(closeSearchAppliance);
 }
 
+//Display tag of appliance
 export function displayTagAppliance(e, listAppliance, angleDownAppliance, filterViewAppliance, selectedTagAppliance, filterView) {
     filterView.style.width = '100%';
     filterView.style.height = '46.5px';
@@ -178,6 +198,7 @@ export function displayTagAppliance(e, listAppliance, angleDownAppliance, filter
     }
 }
 
+//Close dom list appliance
 export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils) {
     angleDownAppliance.style.display = 'block';
     angleDownUstensils.style.left = '620px'
@@ -190,7 +211,9 @@ export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, sear
     filterContainerAppliance.style.width = 'auto';
 }
 
-//Ustenils display function
+//USTENSILS
+
+//Display ustensils on the ustensils list
 export function displayUstensils(dataUstensils, searchUstensils, listUstensils, searchStringUstensils) {
     let tableauUstensils = [];
 
@@ -212,6 +235,7 @@ export function displayUstensils(dataUstensils, searchUstensils, listUstensils, 
     });
 }
 
+//Display container of ustensils
 export function displayListUstensils(e, angleDownUstensils, angleUpUstensils, filterContainerUstensils, closeSearchUstensils) {
     angleDownUstensils.style.display = 'none';
     angleUpUstensils.style.display = 'block';
@@ -224,6 +248,7 @@ export function displayListUstensils(e, angleDownUstensils, angleUpUstensils, fi
     filterContainerUstensils.appendChild(closeSearchUstensils);
 }
 
+//Display tag of ustesils
 export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
     filterView.style.width = '100%';
     filterView.style.height = '46.5px';
@@ -246,6 +271,7 @@ export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterVi
     }
 }
 
+// Close DOM list ustensils
 export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils) {
     angleDownUstensils.style.display = 'block';
 
@@ -255,14 +281,4 @@ export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, sear
     searchUstensils.value = '';
     listUstensils.innerHTML = ``;
     filterContainerUstensils.style.width = 'auto';
-}
-
-export function displayError(errorView) {
-    const main = document.querySelector('main');
-    const errorText = document.createElement('h1');
-
-    errorText.style.fontSize = '20px';
-    errorText.textContent = 'Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.';
-    errorView.appendChild(errorText);
-    main.appendChild(errorView)
 }
