@@ -100,14 +100,17 @@ export function displayTagIngredient(e, listIngredients, angleDownIngredients, f
     angleDownIngredients.style.top = '370px';
     filterViewIngredients.style.display = 'flex';
     filterViewIngredients.className = 'view_ing';
-    selectedTagIngredients.push(e.target.textContent.toLowerCase());
 
-    filterViewIngredients.innerHTML += `    <p class='tag_text_ing'>${e.target.textContent}
-                                                <a class="close_tag_ing">
-                                                    <i class="fa-regular fa-circle-xmark"></i>
-                                                </a>
-                                            </p>`
-    filterView.appendChild(filterViewIngredients);
+    if(selectedTagIngredients.indexOf(e.target.textContent.toLowerCase()) === - 1) {
+        selectedTagIngredients.push(e.target.textContent.toLowerCase());
+    
+        filterViewIngredients.innerHTML += `    <p class='tag_text_ing'>${e.target.textContent}
+                                                    <a class="close_tag_ing">
+                                                        <i class="fa-regular fa-circle-xmark"></i>
+                                                    </a>
+                                                </p>`
+        filterView.appendChild(filterViewIngredients);
+    }
 }
 
 export function closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils) {
@@ -162,14 +165,17 @@ export function displayTagAppliance(e, listAppliance, angleDownAppliance, filter
     angleDownAppliance.style.top = '370px';
     filterViewAppliance.style.display = 'flex';
     filterViewAppliance.className = 'view_app';
-    selectedTagAppliance.push(e.target.textContent.toLowerCase());
 
-    filterViewAppliance.innerHTML += `  <p class='tag_text_app'>${e.target.textContent}
-                                            <a class="close_tag_app">
-                                                <i class="fa-regular fa-circle-xmark"></i>
-                                            </a>
-                                        </p>`
-    filterView.appendChild(filterViewAppliance);
+    if(selectedTagAppliance.indexOf(e.target.textContent.toLowerCase()) === -1) {
+        selectedTagAppliance.push(e.target.textContent.toLowerCase());
+    
+        filterViewAppliance.innerHTML += `  <p class='tag_text_app'>${e.target.textContent}
+                                                <a class="close_tag_app">
+                                                    <i class="fa-regular fa-circle-xmark"></i>
+                                                </a>
+                                            </p>`
+        filterView.appendChild(filterViewAppliance);
+    }
 }
 
 export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils) {
@@ -226,6 +232,8 @@ export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterVi
     angleUpUstensils.style.top = '320px';
     filterViewUstensils.style.display = 'flex';
     filterViewUstensils.className = 'view_usts';
+
+    if(selectedTagUstensils.indexOf(e.target.textContent.toLowerCase()) === -1) {
     selectedTagUstensils.push(e.target.textContent.toLowerCase());
 
     filterViewUstensils.innerHTML += `  <p class='tag_text_usts'>${e.target.textContent}
@@ -235,6 +243,7 @@ export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterVi
                                         </p>`
 
     filterView.appendChild(filterViewUstensils);
+    }
 }
 
 export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils) {

@@ -219,17 +219,7 @@ listIngredients.addEventListener(('click'), e => {
             }
 
             if (selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleUpIngredients.style.top = '320px';
-                filterView.style.width = 0;
-                filterView.style.height = 0;
-                listIngredients.style.top = '360px';
-                angleDownAppliance.style.top = "320px";
-                angleUpAppliance.style.top = '320px';
-                listAppliance.style.top = '360px';
-                angleDownUstensils.style.top = '320px';
-                angleUpUstensils.style.top = '320px';
-                listUstensils.style.top = '360px';
+                mainResetDisplay()
             }
         }));
     }));
@@ -329,17 +319,7 @@ listAppliance.addEventListener(('click'), e => {
             }
 
             if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleUpIngredients.style.top = '320px';
-                filterView.style.width = 0;
-                filterView.style.height = 0;
-                listIngredients.style.top = '360px';
-                angleDownAppliance.style.top = "320px";
-                angleUpAppliance.style.top = '320px';
-                listAppliance.style.top = '360px';
-                angleDownUstensils.style.top = '320px';
-                angleUpUstensils.style.top = '320px';
-                listUstensils.style.top = '360px';
+                mainResetDisplay()
             }
         }));
     }));
@@ -437,17 +417,7 @@ listUstensils.addEventListener(('click'), e => {
             }
 
             if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
-                angleDownIngredients.style.top = '320px';
-                angleUpIngredients.style.top = '320px';
-                filterView.style.width = 0;
-                filterView.style.height = 0;
-                listIngredients.style.top = '360px';
-                angleDownAppliance.style.top = "320px";
-                angleUpAppliance.style.top = '320px';
-                listAppliance.style.top = '360px';
-                angleDownUstensils.style.top = '320px';
-                angleUpUstensils.style.top = '320px';
-                listUstensils.style.top = '360px';
+                mainResetDisplay()
             }
         }));
     }));
@@ -455,3 +425,17 @@ listUstensils.addEventListener(('click'), e => {
 })
 
 closeSearchUstensils.addEventListener(('click'), e => closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils));
+
+function mainResetDisplay() {
+    angleDownIngredients.style.top = '320px';
+    angleUpIngredients.style.top = '320px';
+    filterView.style.width = 0;
+    filterView.style.height = 0;
+    listIngredients.style.top = '360px';
+    angleDownAppliance.style.top = "320px";
+    angleUpAppliance.style.top = '320px';
+    listAppliance.style.top = '360px';
+    angleDownUstensils.style.top = '320px';
+    angleUpUstensils.style.top = '320px';
+    listUstensils.style.top = '360px';
+}

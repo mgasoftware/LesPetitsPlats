@@ -316,6 +316,11 @@ input {
     margin-bottom: 100px;
 }
 
+.card {
+    max-width: 380px;
+    max-height: 364px;
+}
+
 .card-body {
     background: #e7e7e7;
 }
@@ -345,6 +350,7 @@ input {
 .card-main {
     display: flex;
     justify-content: space-between;
+    max-height: 109px;
 }
 
 .card-list-ingredients {
@@ -373,5 +379,7 @@ input {
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
-    line-height: 100%;
+    line-height: 100%;    
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
