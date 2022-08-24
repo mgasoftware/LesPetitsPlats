@@ -125,7 +125,23 @@ searchInputMain.addEventListener(('input'), e => {
     }
 })
 
-// Ingredients function
+// Function who reset the display when change of view applied
+function mainResetDisplay() {
+    angleDownIngredients.style.top = '320px';
+    angleUpIngredients.style.top = '320px';
+    filterView.style.width = 0;
+    filterView.style.height = 0;
+    listIngredients.style.top = '360px';
+    angleDownAppliance.style.top = "320px";
+    angleUpAppliance.style.top = '320px';
+    listAppliance.style.top = '360px';
+    angleDownUstensils.style.top = '320px';
+    angleUpUstensils.style.top = '320px';
+    listUstensils.style.top = '360px';
+}
+// INGREDIENTS
+
+// Fuction open ingredients
 const openIngredient = e => {
     displayListIngredient(e, angleDownIngredients, angleUpIngredients, filterContainerIngredients, closeSearchIngredients);
 
@@ -148,6 +164,7 @@ const openIngredient = e => {
 searchIngredients.addEventListener(('click'), openIngredient);
 openSearchIngredients.addEventListener(('click'), openIngredient);
 
+// Function search ingredient in it list
 searchIngredients.addEventListener(('input'), e => {
     searchStringIngredients = e.target.value.toLowerCase();
     if (searchString.length >= 3 && searchStringIngredients.length >= 1) {
@@ -166,6 +183,7 @@ searchIngredients.addEventListener(('input'), e => {
     }
 });
 
+// Function who take the ingredients select and display it to the dom
 listIngredients.addEventListener(('click'), e => {
     displayTagIngredient(e, listIngredients, angleDownIngredients, filterViewIngredients, selectedTagIngredients, filterView);
 
@@ -192,6 +210,7 @@ listIngredients.addEventListener(('click'), e => {
     listAppliance.style.top = '410px';
     listUstensils.style.top = '410px';
 
+    // Function who close the ingredients selected
     linkTagCloseIngs.forEach(linkTagCloseIng => linkTagCloseIng.addEventListener('click', e => {
         tagTextIngs.forEach(tagTextIng => tagTextIng.addEventListener('click', e => {
             let text = tagTextIng.innerText.toLowerCase();
@@ -228,7 +247,9 @@ listIngredients.addEventListener(('click'), e => {
 
 closeSearchIngredients.addEventListener(('click'), e => closeListIngredient(e, angleDownIngredients, angleUpIngredients, searchIngredients, listIngredients, filterContainerIngredients, selectedTagIngredients, angleDownAppliance, angleDownUstensils));
 
-// Appliance function
+// APPLIANCE
+
+// Function open appliance
 const openAppliance = e => {
     displayListAppliance(e, angleDownAppliance, angleUpAppliance, filterContainerAppliance, closeSearchAppliance);
     if (searchString.length >= 3) {
@@ -248,6 +269,7 @@ const openAppliance = e => {
 searchAppliance.addEventListener(('click'), openAppliance);
 openSearchAppliance.addEventListener(('click'), openAppliance);
 
+// Function search appliance in it list
 searchAppliance.addEventListener(('input'), e => {
     searchStringAppliance = e.target.value.toLowerCase();
     if (searchString.length >= 3 && searchStringAppliance.length >= 1) {
@@ -266,6 +288,7 @@ searchAppliance.addEventListener(('input'), e => {
     }
 })
 
+// Function who take the appliance select and display it to the dom
 listAppliance.addEventListener(('click'), e => {
     displayTagAppliance(e, listAppliance, angleDownAppliance, filterViewAppliance, selectedTagAppliance, filterView);
 
@@ -291,6 +314,7 @@ listAppliance.addEventListener(('click'), e => {
     listIngredients.style.top = '410px';
     listUstensils.style.top = '410px';
 
+    // Function who close the tag appliance selected
     linkTagCloseApps.forEach(linkTagCloseApp => linkTagCloseApp.addEventListener('click', e => {
         tagTextApps.forEach(tagTextApp => tagTextApp.addEventListener('click', e => {
             let text = tagTextApp.innerText.toLowerCase();
@@ -328,7 +352,9 @@ listAppliance.addEventListener(('click'), e => {
 
 closeSearchAppliance.addEventListener(('click'), e => closeListAppliance(e, angleDownAppliance, angleUpAppliance, searchAppliance, listAppliance, filterContainerAppliance, selectedTagAppliance, angleDownUstensils));
 
-//Ustensils function
+// USTENSILS
+
+// Function open ustensils
 const openUstensils = e => {
     displayListUstensils(e, angleDownUstensils, angleUpUstensils, filterContainerUstensils, closeSearchUstensils);
 
@@ -348,6 +374,7 @@ const openUstensils = e => {
 searchUstensils.addEventListener(('click'), openUstensils);
 openSearchUstensils.addEventListener(('click'), openUstensils);
 
+// Function search ustensils in it list
 searchUstensils.addEventListener(('input'), e => {
     searchStringUstensils = e.target.value.toLowerCase();
     if (searchString.length >= 3 && searchStringUstensils.length >= 1) {
@@ -366,6 +393,7 @@ searchUstensils.addEventListener(('input'), e => {
     }
 })
 
+// Function who take the ingredients select and display it to the dom
 listUstensils.addEventListener(('click'), e => {
     displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView);
     if (searchString.length <= 3 && datasFiltered.length === 0) {
@@ -390,6 +418,7 @@ listUstensils.addEventListener(('click'), e => {
     listIngredients.style.top = '410px';
     listAppliance.style.top = '410px';
 
+    // Function who close the tag ustensils selected
     linkTagCloseUsts.forEach(linkTagCloseUst => linkTagCloseUst.addEventListener('click', e => {
         tagTextUsts.forEach(tagTextUst => tagTextUst.addEventListener('click', e => {
             let text = tagTextUst.innerText.toLowerCase();
@@ -426,16 +455,3 @@ listUstensils.addEventListener(('click'), e => {
 
 closeSearchUstensils.addEventListener(('click'), e => closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils));
 
-function mainResetDisplay() {
-    angleDownIngredients.style.top = '320px';
-    angleUpIngredients.style.top = '320px';
-    filterView.style.width = 0;
-    filterView.style.height = 0;
-    listIngredients.style.top = '360px';
-    angleDownAppliance.style.top = "320px";
-    angleUpAppliance.style.top = '320px';
-    listAppliance.style.top = '360px';
-    angleDownUstensils.style.top = '320px';
-    angleUpUstensils.style.top = '320px';
-    listUstensils.style.top = '360px';
-}
