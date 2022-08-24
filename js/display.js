@@ -115,8 +115,6 @@ export function closeListIngredient(e, angleDownIngredients, angleUpIngredients,
     angleDownUstensils.style.left = '620px';
     angleDownIngredients.style.display = 'block';
 
-    angleUpIngredients.style.top = '370px';
-
     angleUpIngredients.style.display = 'none';
     searchIngredients.setAttribute('class', 'filter_search ingredients');
     searchIngredients.setAttribute('placeholder', 'Ingredients');
@@ -178,8 +176,6 @@ export function closeListAppliance(e, angleDownAppliance, angleUpAppliance, sear
     angleDownAppliance.style.display = 'block';
     angleDownUstensils.style.left = '620px'
 
-    angleUpAppliance.style.top = '370px';
-
     angleUpAppliance.style.display = 'none';
     searchAppliance.setAttribute('class', 'filter_search appliance');
     searchAppliance.setAttribute('placeholder', 'Appareils');
@@ -222,11 +218,12 @@ export function displayListUstensils(e, angleDownUstensils, angleUpUstensils, fi
     filterContainerUstensils.appendChild(closeSearchUstensils);
 }
 
-export function displayTagUstensils(e, listUstensils, angleDownUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
+export function displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView) {
     filterView.style.width = '100%';
     filterView.style.height = '46.5px';
     listUstensils.style.top = '410px';
-    angleDownUstensils.style.top = '370px';
+    angleUpUstensils.style.display = 'block';
+    angleUpUstensils.style.top = '320px';
     filterViewUstensils.style.display = 'flex';
     filterViewUstensils.className = 'view_usts';
     selectedTagUstensils.push(e.target.textContent.toLowerCase());
@@ -243,12 +240,20 @@ export function displayTagUstensils(e, listUstensils, angleDownUstensils, filter
 export function closeListUstensils(e, angleDownUstensils, angleUpUstensils, searchUstensils, listUstensils, filterContainerUstensils, selectedTagUstensils) {
     angleDownUstensils.style.display = 'block';
 
-    angleUpUstensils.style.top = '370px';
-
     angleUpUstensils.style.display = 'none';
     searchUstensils.setAttribute('class', 'filter_search ustensils');
     searchUstensils.setAttribute('placeholder', 'Ustensiles');
     searchUstensils.value = '';
     listUstensils.innerHTML = ``;
     filterContainerUstensils.style.width = 'auto';
+}
+
+export function displayError(errorView) {
+    const main = document.querySelector('main');
+    const errorText = document.createElement('h1');
+
+    errorText.style.fontSize = '20px';
+    errorText.textContent = 'Aucune recette ne correspond à votre critère... vous pouvez chercher « tarte aux pommes », « poisson », etc.';
+    errorView.appendChild(errorText);
+    main.appendChild(errorView)
 }

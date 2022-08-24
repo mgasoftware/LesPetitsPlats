@@ -3,7 +3,7 @@ import {
     displayCard, displayIngredients,
     displayFilterIngredients, displayListIngredient, displayTagIngredient, closeListIngredient,
     displayAppliance, displayListAppliance, displayTagAppliance, closeListAppliance,
-    displayUstensils, displayListUstensils, displayTagUstensils, closeListUstensils
+    displayUstensils, displayListUstensils, displayTagUstensils, closeListUstensils, displayError
 } from '/js/display.js'
 import {
     filterCard, filterIngredients, filterTagsIngredients, filterAppliance,
@@ -38,6 +38,8 @@ let viewUsts;
 // Main HTML Element
 const searchInputMain = document.getElementById('search');
 const filterView = document.querySelector('.filter_view');
+const mainContainer = document.querySelector('.main_container');
+const errorView = document.querySelector('.error_view');
 
 // Ingredients HTML Element
 const searchIngredients = document.getElementById('search_ingredients');
@@ -113,6 +115,13 @@ searchInputMain.addEventListener(('input'), e => {
     else if (searchString.length < 3 && selectedTagIngredients.length > 0 && selectedTagAppliance.length > 0 && selectedTagUstensils.length > 0) {
         datasFiltered = filterCard(datasFiltered, searchString);
         displayCard(datasFiltered);
+    }
+
+    if (mainContainer.innerHTML === '' && errorView.innerHTML === '') {
+        displayError(errorView);
+    }
+    else if (mainContainer.innerHTML !== '') {
+        errorView.innerHTML = ``;
     }
 })
 
@@ -378,7 +387,7 @@ searchUstensils.addEventListener(('input'), e => {
 })
 
 listUstensils.addEventListener(('click'), e => {
-    displayTagUstensils(e, listUstensils, angleDownUstensils, filterViewUstensils, selectedTagUstensils, filterView);
+    displayTagUstensils(e, listUstensils, angleUpUstensils, filterViewUstensils, selectedTagUstensils, filterView);
     if (searchString.length <= 3 && datasFiltered.length === 0) {
         datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
         displayCard(datasFiltered);
@@ -391,7 +400,6 @@ listUstensils.addEventListener(('click'), e => {
     linkTagCloseUsts = document.querySelectorAll('.close_tag_usts');
     tagTextUsts = document.querySelectorAll('.tag_text_usts');
     viewUsts = document.querySelector('.view_usts');
-
 
     angleDownIngredients.style.top = '370px';
     angleUpIngredients.style.top = '370px';

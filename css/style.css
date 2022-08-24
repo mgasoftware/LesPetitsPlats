@@ -240,6 +240,13 @@ input {
 }
 
 .filter_search_list {
+    padding-left: 19px;
+    color: white;
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 22px;
     margin-right: 20px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -250,10 +257,6 @@ input {
 .filter_search_list::placeholder{
     color: white;
     opacity: 0.5;
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 22px;
-    padding-left: 19px;
 }
 .list_ingredients {
     width: 647px;
