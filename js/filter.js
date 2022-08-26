@@ -1,9 +1,16 @@
-// filter function of the main search with the first algo
+// filter function of the main search with the second algo
 export function filterCard(datas, searchString) {
-  datas = datas.filter((data) => data.name.toLowerCase().includes(searchString)
-        || data.description.toLowerCase().includes(searchString)
-        || data.ingredients.find((el) => (el.ingredient).toLowerCase().includes(searchString)));
-  return datas;
+  let datasFiltered = [];
+  for (let i = 0; i < datas.length; i++) {
+    for (let y = 0; y < datas[i].ingredients.length; y++) {
+      if (datas[i].name.toLowerCase().includes(searchString) || datas[i].description.toLowerCase().includes(searchString)
+                || datas[i].ingredients[y].ingredient.toLowerCase().includes(searchString)) {
+        datasFiltered.push(datas[i]);
+      }
+    }
+  }
+  datasFiltered = Array.from(new Set(datasFiltered));
+  return datasFiltered;
 }
 
 // filter function of the ingredients search
