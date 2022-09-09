@@ -208,18 +208,15 @@ listIngredients.addEventListener(('click'), (e) => {
       if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterTagsIngredients(recipes, selectedTagIngredients);
         displayCard(datasFiltered);
-        console.log('Boucle 1')
       } else if (searchString.length >= 3 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterCard(recipes, searchString);
         displayCard(datasFiltered);
-        console.log('Boucle 2')
       } else {
         datasFiltered = filterCard(recipes, searchString);
         datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
         datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
         datasFiltered = filterTagUstensils(datasFiltered, selectedTagUstensils);
         displayCard(datasFiltered);
-        console.log('Boucle 3')
       }
 
       if (selectedTagIngredients.length === 0) {
@@ -312,18 +309,15 @@ listAppliance.addEventListener(('click'), (e) => {
       if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterTagAppliance(recipes, selectedTagAppliance);
         displayCard(datasFiltered);
-        console.log('Boucle 1')
       } else if (searchString.length >= 3 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterCard(recipes, searchString);
         displayCard(datasFiltered);
-        console.log('Boucle 2')
       } else {
         datasFiltered = filterCard(recipes, searchString);
         datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
         datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
         datasFiltered = filterTagUstensils(datasFiltered, selectedTagUstensils);
         displayCard(datasFiltered);
-        console.log('Boucle 3')
       }
 
       if (selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
@@ -407,18 +401,15 @@ listUstensils.addEventListener(('click'), (e) => {
       if (searchString.length < 3 && selectedTagAppliance.length === 0 && selectedTagIngredients.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterTagUstensils(recipes, selectedTagUstensils);
         displayCard(datasFiltered);
-        console.log('Boucle 1')
       } else if (searchString.length >= 3 && selectedTagIngredients.length === 0 && selectedTagAppliance.length === 0 && selectedTagUstensils.length === 0) {
         datasFiltered = filterCard(recipes, searchString);
         displayCard(datasFiltered);
-        console.log('Boucle 2')
       } else {
         datasFiltered = filterCard(recipes, searchString);
         datasFiltered = filterTagsIngredients(datasFiltered, selectedTagIngredients);
         datasFiltered = filterTagAppliance(datasFiltered, selectedTagAppliance);
         datasFiltered = filterTagUstensils(datasFiltered, selectedTagUstensils);
         displayCard(datasFiltered);
-        console.log('Boucle 3')
       }
 
       if (selectedTagUstensils.length === 0) {
